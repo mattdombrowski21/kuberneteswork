@@ -9,7 +9,7 @@ build-stamp_%: %.Dockerfile
 	touch $@
 
 push-stamp_%: build-stamp_%
-	podman push squid
+	podman push squid-img
 	touch $@
 
 push_all: $(patsubst %.Dockerfile,push-stamp_%,$(wildcard *.Dockerfile))
