@@ -5,7 +5,7 @@ build-stamp_%: %.Dockerfile
 	mkdir /etc/squid
 	cp squid.conf /etc/squid
 	cp squid.service /etc/systemd/system/
-	podman create -dt -v /etc/squid:/myVol:z -p 3128:3128 --name squid-cont squid-img squid -N -f /myVol/squid.conf
+	podman create -dt -v /etc/squid/squid.conf:/etc/squid/squid.conf:z -p 3128:3128 --name squid-cont squid-img squid -N
 	touch $@
 
 push-stamp_%: build-stamp_%
