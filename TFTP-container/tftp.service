@@ -1,0 +1,12 @@
+[Unit]
+Description = Squid Proxy Container Service
+Wants       = network.target
+
+[Service]
+Restart = always
+Type = simple
+ExecStart = /usr/bin/podman start -a squid-cont
+ExecStop = /usr/bin/podman stop -t 2 squid-cont
+
+[Install]
+WantedBy = multi-user.target
