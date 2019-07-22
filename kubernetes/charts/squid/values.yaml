@@ -1,0 +1,6 @@
+replica_count: 1
+image_name: tfplenum/squid
+image_tag: 4.4
+container_port: 3128
+service_type: NodePort
+node_port: 3128

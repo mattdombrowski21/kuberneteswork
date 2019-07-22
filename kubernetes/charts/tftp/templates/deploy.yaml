@@ -1,0 +1,30 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    component: tftp-server
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      component: tftp-server
+  template:
+    metadata:
+      labels:
+        component: tftp-server
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image_name }}:{{ .Values.image_tag }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: tftp
+              containerPort: {{ .Values.container_port }}
+              protocol: UDP
+          resources:
+            requests:
+              ### FIGURE THIS PART OUT ### 
+...

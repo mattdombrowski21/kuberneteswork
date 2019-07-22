@@ -1,0 +1,44 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    component: squid
+spec:
+  replicas: {{ .Values.replica_count }}
+  selector:
+    matchLabels:
+      component: squid
+  template:
+    metadata:
+      labels:
+        component: squid
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image_name }}:{{ .Values.image_tag }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: proxy
+              containerPort: {{ .Values.container_port }}
+              protocol: TCP
+          resources:
+            requests:
+              ### FIGURE THIS PART OUT ### 
+          volumeMounts:
+          - name: logs
+            mountPath: /var/log/squid
+          - name: config
+            mountPath: /etc/squid/squid.conf
+            subPath: squid.conf 
+      volumes:
+      - name: logs
+        hostPath:
+          path: /opt/tfplenum/squid
+          type: DirectoryOrCreate
+      - name: config
+        configMap:
+          name: {{ .Release.Name }}
+...

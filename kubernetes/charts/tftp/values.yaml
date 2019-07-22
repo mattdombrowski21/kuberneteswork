@@ -1,0 +1,6 @@
+replicaCount: 1
+image_name: tfplenum/tftp-server
+image_tag: 5.2
+container_port: 69
+service_type: NodePort
+node_port: 69

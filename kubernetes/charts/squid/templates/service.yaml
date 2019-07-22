@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "squid.fullname" . }}
+  labels:
+    component: squid
+spec:
+  type: {{ .Values.service_type }}
+  ports:
+    - name: proxy
+      port: {{ .Values.container_port }}
+      targetPort: {{ .Values.container_port }}
+      nodePort: {{ .Values.node_port }}
+      protocol: TCP
+  selector:
+    matchLabels:
+      component: squid
