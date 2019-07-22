@@ -1,12 +1,12 @@
 [Unit]
-Description = Squid Proxy Container Service
+Description = TFTP Container Service
 Wants       = network.target
 
 [Service]
 Restart = always
 Type = simple
-ExecStart = /usr/bin/podman start -a squid-cont
-ExecStop = /usr/bin/podman stop -t 2 squid-cont
+ExecStart = /usr/bin/podman start -a tftp-cont
+ExecStop = /usr/bin/podman stop -t 2 tftp-cont
 
 [Install]
 WantedBy = multi-user.target
